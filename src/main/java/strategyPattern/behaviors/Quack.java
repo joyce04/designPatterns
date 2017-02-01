@@ -1,0 +1,9 @@
+package strategyPattern.behaviors;
+
+import strategyPattern.behaviorInterface.QuackBehavior;
+
+public class Quack implements QuackBehavior {
+    public void quack() {
+        System.out.println("Quack");
+    }
+}
