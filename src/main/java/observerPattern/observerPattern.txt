@@ -1,0 +1,42 @@
+Observer Pattern:   한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 갱신되는 방식으로
+                    일 대 다 의전송을 정의합니다.
+    Loose Coupling: 상호작용을 하긴 하지만 서로에 대해 잘 모른다
+                    옵저버 추가 시 주체 변경 없음, 독립적, 상호의존성을 최소화
+
+    Weather Station <---------- Weather Data <------------- 화면에 표시
+    습도, 온도 입력 센서               객체(데이터 취득)
+
+
+    WeatherData
+    -getTemperature()
+    -getHumidity()
+    -getPressure()
+    -measurementChanged() : 기상 관측값이 갱신될 때마다 알려주기 위한 메소드
+
+    주제 객체(Subject) -----> 주제의 데이터가 달라지면 옵저버한테 소식 전달 ------> 옵저버 (A, B, C객체들)
+    Interface                                                         Interface : 1) Observer                   2) Interface : 2) DisplayElement
+    -registerObserver()                                               -update() : 주제의 상태가 바뀌었을 때 호출        -display()
+    -removeObserver()
+    -notifyObserver()
+
+    Implementation                                                    Implementation
+    WeatherData                                                       CurrentConditions, StatisticsDisplay, ForecastDisplay
+    ......                                                            -update()
+    -getTemperature()                                                 -display()
+    -getHumidity()
+    -getPressure()
+    -measurementChanged()
+
+
+    JAVA 내장 옵저버 방식(java.util)
+    subject = Observable: class이기 때문에 다른 superclass 확장불가 + 멀티스레드 불가
+    1) setChanged() 객체의 상태가 바뀌었다는 것을 알림, 조건에 따라 호출할수 있도록 유연성 증가시킴
+    2) notifyObservers() or notifyObservers(Obj arg)-연락할 데이터를 전달하는 푸시 방법
+    *clearChanged(), hasChanged()
+
+    observer
+    1) update(Observable O, Obj arg)- 직접 데이터를 찾아올 수 있도록 observable을 받음, 풀 PULL 방법
+
+    *observer에게 연락가는 순서에 의존해서는 안된다.
+    *observer pattern에서 변하는 것 = 주제의 상태 & 옵저버의 갯수, 형식
+    -> 주제를 바꾸지 않고 의존 객체들을 바꿀 수 있다.
