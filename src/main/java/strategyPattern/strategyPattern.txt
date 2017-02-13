@@ -1,3 +1,6 @@
+*content from Head first design patterns by OReily
+(text and source code included : summary and codes for study purpose only)
+
 Strategy Pattern : 알고리즘 군을 정의하고 각각을 캡슐화하여 교환해서 사용할 수 있도록 만든다
 1)  Duck
     -quack()

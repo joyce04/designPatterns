@@ -1,4 +1,5 @@
 *content from Head first design patterns by OReily
+(text and source code included : summary and codes for study purpose only)
 
 Observer Pattern:   한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 갱신되는 방식으로
                     일 대 다 의전송을 정의합니다.
