@@ -1,0 +1,53 @@
+*All information credit to Head first design pattern
+Decoration Pattern: 객체에 추가적인 요건을 동적으로 첨가한다.
+    테코레이터는 서브클래스를 만드는 것을 통해서 기능을 유연하게 확장할 수 있는 방법을 제공한다.
+
+1) Beverage:                메뉴가 추가되면 새로운 메소드를 추가해야만한다
+       descriptions()
+       cost()
+       hasMilk()
+       setMilk()
+       hasWhip()
+       setWhip()
+
+   HouseBlend extends Beverage:
+       cost()
+   DarkRoast extends Beverage:
+       cost()
+
+2) 구성을 통해 동적으로 행동을 설정 할 수 있다 + 객체를 동적으로 구성하면 기존 코드를 고치는 대신 새로운 코드를 만들어 새로운 기능을 추가 할 수 있다.
+*OCP: open-closed principle - 클래스는 확장에 대해서는 열려 있어야 하지만 코드변경에 대해서는 닫혀 있어야 한다
+
+    DarkRoast 객체
+        +Mocha 객체로 장식
+        +Whip 객체로 장식
+        cost()호출
+    = {[(DR) Mocha] Whip}
+
+    가격계산 = whip.cost() + mocha.cost() + dp.cost()
+
+    decorator는 자신이 장식하고 있는 객체와 같은 슈퍼 클래스를 가지고 있기 때문에 원래 객체가 들어갈 자리에 테코레이터 객체를 집어넣어도 상관 없다
+
+    Component
+        methodA()
+        methodB()
+
+    ConcreteComponent extends Component          Decorator extends Component
+                                                    ConcreteDecorator extends Decorator
+                                                        Component wrappedObj
+                                                        methodA()
+                                                        moreBehavior()
+
+    abstract Beverage
+        description()
+        getDescription()
+        cost()
+    HouseBlend extends Beverage                     abstract CondimentDecorator extends Beverage
+    DarkRoast extends Beverage                      Milk extends CondimentDecorator
+    Espresso extends Beverage                           Beverage bev
+    Decaf extends Beverage                              cost()
+                                                        getDescription()
+                                                    Mocha extends CondimentDecorator
+                                                    Soy extends CondimentDecorator
+                                                    Whip extends CondimentDecorator
+
